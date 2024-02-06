@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var lockY = true
+var lockX = true
 
 @onready var cameraNode: Camera2D = get_node("/root/World/Camera2D")
 
@@ -18,9 +19,12 @@ func _ready():
 	get_node("AnimatedSprite2D").play("idle")
 	
 func _process(delta):
-	cameraNode.position.x = position.x
 	if not lockY:
 		cameraNode.position.y = position.y
+	else:
+		cameraNode.position.y = position.y + 5000
+	cameraNode.position.x = position.x
+	
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -60,3 +64,9 @@ func _on_camera_lock_y_body_entered(body):
 
 func _on_camera_unlock_y_body_entered(body):
 	lockY = false
+	
+func _on_camera_unlock_x_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	lockX = false
+
+func _on_camera_lock_x_body_entered(body):
+	lockX = true
