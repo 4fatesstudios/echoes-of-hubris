@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
+var camPositionY
 var lockY = true
 var lockX = true
 
@@ -15,15 +16,26 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	cameraNode.position.x = position.x
-	cameraNode.position.y = position.y - 100
+	camPositionY = position.y - 100
+	cameraNode.position.y = camPositionY
 	get_node("AnimatedSprite2D").play("idle")
 	
 func _process(delta):
+	cameraNode.position.x = position.x
 	if not lockY:
 		cameraNode.position.y = position.y
-	else:
-		cameraNode.position.y = position.y + 5000
-	cameraNode.position.x = position.x
+
+	if Input.is_action_just_pressed("ui_up"):
+		cameraNode.position.y = cameraNode.position.y - 50
+
+	if Input.is_action_just_released("ui_up"):
+		cameraNode.position.y = camPositionY
+	
+	if Input.is_action_just_pressed("ui_down"):
+		cameraNode.position.y = cameraNode.position.y + 100
+		
+	if Input.is_action_just_released("ui_down"):
+		cameraNode.position.y = camPositionY
 	
 
 func _physics_process(delta):
@@ -58,15 +70,3 @@ func _physics_process(delta):
 		anim.play("fall")
 		
 	move_and_slide()
-	
-func _on_camera_lock_y_body_entered(body):
-	lockY = true
-
-func _on_camera_unlock_y_body_entered(body):
-	lockY = false
-	
-func _on_camera_unlock_x_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	lockX = false
-
-func _on_camera_lock_x_body_entered(body):
-	lockX = true
