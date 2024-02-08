@@ -16,14 +16,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	cameraNode.position.x = position.x
-	camPositionY = position.y - 100
-	cameraNode.position.y = camPositionY
+	cameraNode.position.y = position.y - 100
+	camPositionY = cameraNode.position.y
 	get_node("AnimatedSprite2D").play("idle")
 	
 func _process(delta):
 	cameraNode.position.x = position.x
-	if not lockY:
+	if not lockY && ((!Input.is_action_pressed("ui_up")) && !Input.is_action_pressed("ui_down")):
 		cameraNode.position.y = position.y
+	
+	if lockY && ((!Input.is_action_pressed("ui_up")) && !Input.is_action_pressed("ui_down")):
+		cameraNode.position.y = position.y - 100
 
 	if Input.is_action_just_pressed("ui_up"):
 		cameraNode.position.y = cameraNode.position.y - 50
@@ -32,7 +35,7 @@ func _process(delta):
 		cameraNode.position.y = camPositionY
 	
 	if Input.is_action_just_pressed("ui_down"):
-		cameraNode.position.y = cameraNode.position.y + 100
+		cameraNode.position.y = cameraNode.position.y + 50
 		
 	if Input.is_action_just_released("ui_down"):
 		cameraNode.position.y = camPositionY
@@ -70,3 +73,11 @@ func _physics_process(delta):
 		anim.play("fall")
 		
 	move_and_slide()
+	
+func _on_camera_lock_y_body_entered(_body):
+	lockY = true
+	print("entered lock")
+
+func _on_camera_unlock_y_body_entered(_body):
+	lockY = false
+	print("entered unlock")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bng8jak6i2y38"]
+[gd_scene load_steps=10 format=3 uid="uid://bng8jak6i2y38"]
 
 [ext_resource type="PackedScene" uid="uid://dqb1w5non137h" path="res://Player/Player.tscn" id="1_b30ee"]
 [ext_resource type="PackedScene" uid="uid://daysrcouuhfd7" path="res://EnemyAi/frog.tscn" id="2_4o6k0"]
@@ -20,9 +20,6 @@ size = Vector2(151, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1vmd"]
 size = Vector2(151, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nekjq"]
-size = Vector2(1149, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5af2x"]
 size = Vector2(1149, 26)
@@ -114,7 +111,7 @@ linear_damp = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cameraLockY"]
 position = Vector2(577.5, 587)
-shape = SubResource("RectangleShape2D_nekjq")
+shape = SubResource("RectangleShape2D_5af2x")
 
 [node name="cameraUnlockY" type="Area2D" parent="."]
 position = Vector2(-2, 0)
