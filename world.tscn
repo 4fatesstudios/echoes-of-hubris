@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bng8jak6i2y38"]
+[gd_scene load_steps=10 format=3 uid="uid://bng8jak6i2y38"]
 
 [ext_resource type="PackedScene" uid="uid://dqb1w5non137h" path="res://Player/Player.tscn" id="1_b30ee"]
+[ext_resource type="PackedScene" uid="uid://daysrcouuhfd7" path="res://EnemyAi/frog.tscn" id="2_4o6k0"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_bvk6g"]
 size = Vector2(150, 20)
@@ -25,16 +26,14 @@ size = Vector2(1149, 26)
 
 [node name="World" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_b30ee")]
-position = Vector2(600, 584)
-
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(600, 486)
 zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
 limit_right = 1150
-limit_bottom = 650
+limit_bottom = 850
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
@@ -122,8 +121,18 @@ linear_damp = 0.0
 position = Vector2(577, 396)
 shape = SubResource("RectangleShape2D_5af2x")
 
-[connection signal="body_entered" from="cameraLockY" to="Player" method="_on_camera_lock_y_body_entered"]
-[connection signal="body_entered" from="cameraLockY" to="Player" method="_on_camera_toggle_body_entered"]
-[connection signal="body_entered" from="cameraUnlockY" to="Player" method="_on_camera_lock_y_body_entered"]
-[connection signal="body_entered" from="cameraUnlockY" to="Player" method="_on_camera_unlock_y_body_entered"]
-[connection signal="body_entered" from="cameraUnlockY" to="Player" method="_on_camera_toggle_body_entered"]
+[node name="PlayerNode" type="Node2D" parent="."]
+
+[node name="Player" parent="PlayerNode" instance=ExtResource("1_b30ee")]
+position = Vector2(600, 584)
+
+[node name="MobNodes" type="Node2D" parent="."]
+
+[node name="frog" parent="MobNodes" instance=ExtResource("2_4o6k0")]
+position = Vector2(693, 548)
+
+[connection signal="body_entered" from="cameraLockY" to="PlayerNode/Player" method="_on_camera_lock_y_body_entered"]
+[connection signal="body_entered" from="cameraLockY" to="PlayerNode/Player" method="_on_camera_toggle_body_entered"]
+[connection signal="body_entered" from="cameraUnlockY" to="PlayerNode/Player" method="_on_camera_unlock_y_body_entered"]
+[connection signal="body_entered" from="cameraUnlockY" to="PlayerNode/Player" method="_on_camera_lock_y_body_entered"]
+[connection signal="body_entered" from="cameraUnlockY" to="PlayerNode/Player" method="_on_camera_toggle_body_entered"]
