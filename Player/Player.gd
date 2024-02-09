@@ -22,23 +22,25 @@ func _ready():
 	
 func _process(delta):
 	cameraNode.position.x = position.x
-	if not lockY && ((!Input.is_action_pressed("ui_up")) && !Input.is_action_pressed("ui_down")):
-		cameraNode.position.y = position.y
 	
-	if lockY && ((!Input.is_action_pressed("ui_up")) && !Input.is_action_pressed("ui_down")):
-		cameraNode.position.y = position.y - 100
+	if lockY:
+		cameraNode.position.y = position.y
 
 	if Input.is_action_just_pressed("ui_up"):
-		cameraNode.position.y = cameraNode.position.y - 50
+		cameraNode.position.y = cameraNode.position.y - 75
+		lockY = false
 
 	if Input.is_action_just_released("ui_up"):
 		cameraNode.position.y = camPositionY
+		lockY = true
 	
 	if Input.is_action_just_pressed("ui_down"):
-		cameraNode.position.y = cameraNode.position.y + 50
+		cameraNode.position.y = cameraNode.position.y + 75
+		lockY = false
 		
 	if Input.is_action_just_released("ui_down"):
 		cameraNode.position.y = camPositionY
+		lockY = true
 	
 
 func _physics_process(delta):
@@ -73,11 +75,3 @@ func _physics_process(delta):
 		anim.play("fall")
 		
 	move_and_slide()
-	
-func _on_camera_lock_y_body_entered(_body):
-	lockY = true
-	print("entered lock")
-
-func _on_camera_unlock_y_body_entered(_body):
-	lockY = false
-	print("entered unlock")

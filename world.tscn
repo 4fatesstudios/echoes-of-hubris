@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bng8jak6i2y38"]
+[gd_scene load_steps=9 format=3 uid="uid://bng8jak6i2y38"]
 
 [ext_resource type="PackedScene" uid="uid://dqb1w5non137h" path="res://Player/Player.tscn" id="1_b30ee"]
 [ext_resource type="PackedScene" uid="uid://daysrcouuhfd7" path="res://EnemyAi/frog.tscn" id="2_4o6k0"]
@@ -21,22 +21,15 @@ size = Vector2(151, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1vmd"]
 size = Vector2(151, 50)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nekjq"]
-size = Vector2(1149, 26)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5af2x"]
-size = Vector2(1149, 26)
-
 [node name="World" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 position = Vector2(600, 486)
 zoom = Vector2(2, 2)
 limit_left = 0
-limit_top = 0
+limit_top = 200
 limit_right = 1150
-limit_bottom = 850
+limit_bottom = 620
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
@@ -108,21 +101,18 @@ mesh = SubResource("QuadMesh_bvk6g")
 position = Vector2(524, 433.63)
 shape = SubResource("RectangleShape2D_m1vmd")
 
-[node name="cameraLockY" type="Area2D" parent="."]
-position = Vector2(-2, 0)
-linear_damp = 0.0
+[node name="Platform6" type="StaticBody2D" parent="Platforms"]
+position = Vector2(-41, -430)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cameraLockY"]
-position = Vector2(577.5, 587)
-shape = SubResource("RectangleShape2D_nekjq")
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platforms/Platform6"]
+modulate = Color(0.364706, 0.101961, 0.498039, 1)
+position = Vector2(616, 624)
+scale = Vector2(7.68, 2.365)
+mesh = SubResource("QuadMesh_bvk6g")
 
-[node name="cameraUnlockY" type="Area2D" parent="."]
-position = Vector2(-2, 0)
-linear_damp = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cameraUnlockY"]
-position = Vector2(577, 396)
-shape = SubResource("RectangleShape2D_5af2x")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform6"]
+position = Vector2(616, 624)
+shape = SubResource("RectangleShape2D_ldf23")
 
 [node name="PlayerNode" type="Node2D" parent="."]
 
@@ -133,6 +123,3 @@ position = Vector2(600, 584)
 
 [node name="frog" parent="MobNodes" instance=ExtResource("2_4o6k0")]
 position = Vector2(693, 548)
-
-[connection signal="body_entered" from="cameraLockY" to="PlayerNode/Player" method="_on_camera_lock_y_body_entered"]
-[connection signal="body_entered" from="cameraUnlockY" to="PlayerNode/Player" method="_on_camera_unlock_y_body_entered"]
