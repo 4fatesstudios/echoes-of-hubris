@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
+const CAM_MOVE_DIST = 75.0
+const LOOK_TIMER = 0.5
 var lockY = true
 var lockX = true
 var keyPress = 0
@@ -20,35 +22,34 @@ func _ready():
 func _process(delta):
 	cameraNode.position.x = position.x
 	
+	# active camera movement up and down
+	# TODO add look up/down animation
 	if lockY:
 		cameraNode.position.y = position.y
 	if (velocity.x == 0) && (velocity.y == 0):
 		if Input.is_action_pressed("ui_up") && is_on_floor():
 			keyPress += delta
-			print(keyPress)
-			if keyPress > 2:
-				cameraNode.position.y = position.y - 75
+			if keyPress > LOOK_TIMER:
+				cameraNode.position.y = position.y - CAM_MOVE_DIST
 				lockY = false
 		
 		if Input.is_action_just_released("ui_up") && not Input.is_action_pressed("ui_down"):
 			lockY = true
 			keyPress = 0
-			print("here")
 		
 		if Input.is_action_pressed("ui_down") && is_on_floor():
 			keyPress += delta
-			print(keyPress)
-			if keyPress > 2:
-				cameraNode.position.y = position.y + 75
+			if keyPress > LOOK_TIMER:
+				cameraNode.position.y = position.y + CAM_MOVE_DIST
 				lockY = false
 			
 		if Input.is_action_just_released("ui_down") && not Input.is_action_pressed("ui_up"):
 			lockY = true
 			keyPress = 0
-			print("here")
 	else:
 		keyPress = 0
 		lockY = true
+	# end active cam movement
 	
 
 func _physics_process(delta):
