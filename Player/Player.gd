@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
-var camPositionY
 var lockY = true
 var lockX = true
+var keyPress = 0
 
 @onready var cameraNode: Camera2D = get_node("/root/World/Camera2D")
 
@@ -15,7 +15,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	cameraNode.position.x = position.x
 	cameraNode.position.y = position.y - 100
-	camPositionY = cameraNode.position.y
 	get_node("AnimatedSprite2D").play("idle")
 	
 func _process(delta):
@@ -23,19 +22,32 @@ func _process(delta):
 	
 	if lockY:
 		cameraNode.position.y = position.y
-
-	if Input.is_action_pressed("ui_up") && (velocity.x == 0) && (velocity.y == 0):
-		cameraNode.position.y = position.y - 75
-		lockY = false
-
-	if Input.is_action_just_released("ui_up"):
-		lockY = true
-	
-	if Input.is_action_pressed("ui_down") && (velocity.x == 0) && (velocity.y == 0):
-		cameraNode.position.y = position.y + 75
-		lockY = false
+	if (velocity.x == 0) && (velocity.y == 0):
+		if Input.is_action_pressed("ui_up") && is_on_floor():
+			keyPress += delta
+			print(keyPress)
+			if keyPress > 2:
+				cameraNode.position.y = position.y - 75
+				lockY = false
 		
-	if Input.is_action_just_released("ui_down"):
+		if Input.is_action_just_released("ui_up") && not Input.is_action_pressed("ui_down"):
+			lockY = true
+			keyPress = 0
+			print("here")
+		
+		if Input.is_action_pressed("ui_down") && is_on_floor():
+			keyPress += delta
+			print(keyPress)
+			if keyPress > 2:
+				cameraNode.position.y = position.y + 75
+				lockY = false
+			
+		if Input.is_action_just_released("ui_down") && not Input.is_action_pressed("ui_up"):
+			lockY = true
+			keyPress = 0
+			print("here")
+	else:
+		keyPress = 0
 		lockY = true
 	
 
