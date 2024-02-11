@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var camPositionY
@@ -12,7 +11,6 @@ var lockX = true
 @onready var anim = get_node("AnimationPlayer")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _ready():
 	cameraNode.position.x = position.x
@@ -26,20 +24,18 @@ func _process(delta):
 	if lockY:
 		cameraNode.position.y = position.y
 
-	if Input.is_action_just_pressed("ui_up"):
-		cameraNode.position.y = cameraNode.position.y - 75
+	if Input.is_action_pressed("ui_up"):
+		cameraNode.position.y = position.y - 75
 		lockY = false
 
 	if Input.is_action_just_released("ui_up"):
-		cameraNode.position.y = camPositionY
 		lockY = true
 	
-	if Input.is_action_just_pressed("ui_down"):
-		cameraNode.position.y = cameraNode.position.y + 75
+	if Input.is_action_pressed("ui_down"):
+		cameraNode.position.y = position.y + 75
 		lockY = false
 		
 	if Input.is_action_just_released("ui_down"):
-		cameraNode.position.y = camPositionY
 		lockY = true
 	
 

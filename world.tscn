@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bng8jak6i2y38"]
+[gd_scene load_steps=9 format=3 uid="uid://br5g6hogbqo7q"]
 
 [ext_resource type="PackedScene" uid="uid://dqb1w5non137h" path="res://Player/Player.tscn" id="1_b30ee"]
 [ext_resource type="PackedScene" uid="uid://daysrcouuhfd7" path="res://EnemyAi/frog.tscn" id="2_4o6k0"]
