@@ -24,14 +24,14 @@ func _process(delta):
 	if lockY:
 		cameraNode.position.y = position.y
 
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up") && (velocity.x == 0) && (velocity.y == 0):
 		cameraNode.position.y = position.y - 75
 		lockY = false
 
 	if Input.is_action_just_released("ui_up"):
 		lockY = true
 	
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down") && (velocity.x == 0) && (velocity.y == 0):
 		cameraNode.position.y = position.y + 75
 		lockY = false
 		
