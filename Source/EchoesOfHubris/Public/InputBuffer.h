@@ -1,20 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
+#include "Input.h"
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include <vector>
-#include <string>
 #include "InputBuffer.generated.h"
 
-enum Inputs { JUMP };
-
-struct Input {
-	Inputs inputAction;
-	float timer;
-	bool isSuccessful;
-};
 
 /**
  * 
@@ -25,17 +16,17 @@ class ECHOESOFHUBRIS_API UInputBuffer : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 private:
-	const float INPUT_EXPIRATION_TIME = 0.5;
-	const unsigned int INPUT_BUFFER_QUEUE_LENGTH = 5;
-	std::vector<Input> inputBuffer;
+	TArray<FInput> inputBuffer;
+	static constexpr float INPUT_EXPIRATION_TIME = 0.5f;
+	static constexpr unsigned int INPUT_BUFFER_QUEUE_LENGTH = 5;
 
 public:
-	void addToInputBuffer(Input newInput);
-	Input createNewInput(Inputs input);
-	void increaseTimer(Input& input);
-	bool isExpired(Input input);
-	bool isInputBufferEmpty();
+	TArray<FInput> GetInputBuffer() const { return this->inputBuffer; }
 
-	std::vector<Input> getInputBuffer();
+	void addToInputBuffer(FInput newInput);
+	void increaseTimer(FInput& input);
+	bool isExpired(FInput input);
+	bool isInputBufferEmpty();
 	
+	void execute();
 };
