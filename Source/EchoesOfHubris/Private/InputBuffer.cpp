@@ -1,35 +1,52 @@
 
 #include "InputBuffer.h"
 
+TArray<FInput> UInputBuffer::inputBuffer;
+const AActor* UInputBuffer::ReferenceActor = nullptr;
+
 void UInputBuffer::execute() {
-	// Continuously execute input at the front of the queue
+	//ReferenceActor.Attack()
 	return;
 }
 
 /*
 Add a FInput to input buffer
-Input: FInput
+Input: Inputs
 Output: None
 */
-void UInputBuffer::addToInputBuffer(FInput newInput) {
+void UInputBuffer::addToInputBuffer(Inputs newInput) {
 	// If queue is already max size then skip
-	if (this->inputBuffer.Num() >= INPUT_BUFFER_QUEUE_LENGTH) {
+	if (inputBuffer.Num() >= INPUT_BUFFER_QUEUE_LENGTH) {
 		return;
 	}
 
 	// If action already exists then reset timer to 0
-	Inputs newInputAction = newInput.getInputAction();
-	for (auto& input : this->inputBuffer) {
-		if (input.getInputAction() == newInputAction) {
+	for (auto& input : inputBuffer) {
+		if (input.getInputAction() == newInput) {
 			input.setTimer(0.0);
 			return;
 		}
 	}
 
 	// Else add action
-	this->inputBuffer.Add(newInput);
+	FInput input{ FInput(newInput, INPUT_EXPIRATION_TIME) };
+	inputBuffer.Add(input);
 
 	return;
+}
+
+/*
+Successful call on Input
+Input: Inputs
+Output: None
+*/
+void UInputBuffer::inputSuccess(Inputs newInput) {
+	for (auto& input : inputBuffer) {
+		if (input.getInputAction() == newInput) {
+			inputBuffer.Remove(input);
+			return;
+		}
+	}
 }
 
 /*
@@ -51,7 +68,7 @@ Input: FInput
 Output: None
 */
 bool UInputBuffer::isExpired(FInput input) {
-	return input.getTimer() >= this->INPUT_EXPIRATION_TIME;
+	return input.getTimer() >= INPUT_EXPIRATION_TIME;
 }
 
 /*
@@ -60,5 +77,12 @@ Input: None
 Output: None
 */
 bool UInputBuffer::isInputBufferEmpty() {
-	return this->inputBuffer.Num() == 0;
+	return inputBuffer.Num() == 0;
+}
+
+/*
+* 
+*/
+void UInputBuffer::setActorRef(AActor* actorRef) {
+	ReferenceActor = actorRef;
 }

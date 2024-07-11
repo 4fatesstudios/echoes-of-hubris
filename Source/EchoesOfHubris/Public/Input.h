@@ -21,19 +21,16 @@ struct ECHOESOFHUBRIS_API FInput {
 private:
 	float timer;
 	Inputs inputAction;
-	bool isSuccessful;
 
 public:
 	FInput() {
 		this->timer = 0.0;
 		this->inputAction = Inputs::NONE;
-		this->isSuccessful = false;
 	}
 
-	FInput(Inputs action, float time, bool successful) {
+	FInput(Inputs action, float time) {
 		this->timer = time;
 		this->inputAction = action;
-		this->isSuccessful = successful;
 	}
 
 	float getTimer() const { return this->timer; }
@@ -42,7 +39,9 @@ public:
 	Inputs getInputAction() const { return this->inputAction; }
 	void setInputAction(Inputs input) { this->inputAction = input; }
 
-	bool getIsSuccessful() const { return this->isSuccessful; }
-	void setIsSuccessful(bool success) { this->isSuccessful = success; }
+	// Overload the == operator
+	bool operator==(const FInput& Other) const {
+		return this->inputAction == Other.inputAction;
+	}
 
 };

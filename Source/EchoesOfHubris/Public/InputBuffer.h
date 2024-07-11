@@ -16,17 +16,26 @@ class ECHOESOFHUBRIS_API UInputBuffer : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 private:
-	TArray<FInput> inputBuffer;
+	static TArray<FInput> inputBuffer;
 	static constexpr float INPUT_EXPIRATION_TIME = 0.5f;
 	static constexpr unsigned int INPUT_BUFFER_QUEUE_LENGTH = 5;
+	static const AActor* ReferenceActor;
 
 public:
 	TArray<FInput> GetInputBuffer() const { return this->inputBuffer; }
 
-	void addToInputBuffer(FInput newInput);
-	void increaseTimer(FInput& input);
-	bool isExpired(FInput input);
-	bool isInputBufferEmpty();
+	UFUNCTION(BlueprintCallable, Category = "Input Buffer")
+	static void addToInputBuffer(Inputs newInput);
+
+	UFUNCTION(BlueprintCallable, Category = "Input Buffer")
+	static void inputSuccess(Inputs newInput);
+
+	static void increaseTimer(FInput& input);
+	static bool isExpired(FInput input);
+	static bool isInputBufferEmpty();
 	
-	void execute();
+	static void execute();
+
+	UFUNCTION(BlueprintCallable, Category = "Input Buffer")
+	static void setActorRef(AActor* actorRef);
 };
