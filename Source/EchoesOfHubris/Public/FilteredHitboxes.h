@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Components/BoxComponent.h"
+#include "Components/PrimitiveComponent.h"
 #include "FilteredHitboxes.generated.h"
 
 UCLASS(Blueprintable)
@@ -14,23 +14,25 @@ public:
     UFilteredHitboxes();
 
     /**
-     * Filters the given array of Box Components, removing duplicates based on their owners
-     * and removing any components that do not contain "Hitbox" in their name.
+     * Filters the given array of Primitive Components, removing duplicates based on their owners,
+     * removing any components that do not contain "Hitbox" in their name,
+     * and filtering out components that are not UBoxComponents.
      *
-     * @param BoxComponents The array of Box Components to be filtered.
+     * @param InComponents The array of Primitive Components to be filtered.
+     * @return The filtered array of UBoxComponent*.
      */
-    UFUNCTION(BlueprintCallable, Category = "Filter Hitboxes", meta = (ToolTip = "Filters the given array of Box Components, removing duplicates based on their owners and removing any components that do not contain \"Hitbox\" in their name."))
-    void FilterBoxCollisions(TArray<UBoxComponent*>& BoxComponents);
+    UFUNCTION(BlueprintCallable, Category = "Custom", meta = (ToolTip = "Filters the given array of Primitive Components, removing duplicates based on their owners, removing any components that do not contain \"Hitbox\" in their name, and filtering out components that are not UBoxComponents."))
+    TArray<UBoxComponent*> FilterComponents(const TArray<UPrimitiveComponent*>& InComponents);
 
     /**
      * Clears the set of seen actors.
      */
-    UFUNCTION(BlueprintCallable, Category = "Filter Hitboxes", meta = (ToolTip = "Clears the set of seen actors."))
+    UFUNCTION(BlueprintCallable, Category = "Custom", meta = (ToolTip = "Clears the set of seen actors."))
     void ClearSeenActors();
 
     /**
      * The set of actors that have been seen.
      */
-    UPROPERTY(BlueprintReadWrite, Category = "Filter Hitboxes", meta = (ToolTip = "The set of actors that have been seen."))
+    UPROPERTY(BlueprintReadWrite, Category = "Custom", meta = (ToolTip = "The set of actors that have been seen."))
     TSet<AActor*> SeenActors;
 };

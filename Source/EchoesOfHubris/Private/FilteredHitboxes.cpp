@@ -1,36 +1,32 @@
 #include "FilteredHitboxes.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
 
 UFilteredHitboxes::UFilteredHitboxes()
 {
     SeenActors = TSet<AActor*>();
 }
 
-void UFilteredHitboxes::FilterBoxCollisions(TArray<UBoxComponent*>& BoxComponents)
+TArray<UBoxComponent*> UFilteredHitboxes::FilterComponents(const TArray<UPrimitiveComponent*>& InComponents)
 {
     TArray<UBoxComponent*> FilteredComponents;
 
-    for (UBoxComponent* BoxComp : BoxComponents)
-    {
-        if (BoxComp)
-        {
-            // Check if the box name contains "Hitbox"
-            if (BoxComp->GetName().Contains("Hitbox"))
-            {
-                AActor* Owner = BoxComp->GetOwner();
+    // Set to track seen owners
+    TSet<AActor*> SeenOwners;
 
-                if (Owner && !SeenActors.Contains(Owner))
-                {
-                    // Add to the set of seen owners and the filtered list
-                    SeenActors.Add(Owner);
-                    FilteredComponents.Add(BoxComp);
-                }
-            }
+    for (UPrimitiveComponent* PrimitiveComp : InComponents)
+    {
+        // Check if the component is a UBoxComponent and matches other criteria
+        UBoxComponent* BoxComp = Cast<UBoxComponent>(PrimitiveComp);
+        if (BoxComp && !SeenOwners.Contains(BoxComp->GetOwner()) && BoxComp->GetName().Contains("Hitbox"))
+        {
+            // Add to seen owners and filtered list
+            SeenOwners.Add(BoxComp->GetOwner());
+            FilteredComponents.Add(BoxComp);
         }
     }
 
-    // Update the input array with the filtered components
-    BoxComponents = FilteredComponents;
+    return FilteredComponents;
 }
 
 void UFilteredHitboxes::ClearSeenActors()
