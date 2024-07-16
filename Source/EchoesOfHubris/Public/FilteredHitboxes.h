@@ -21,18 +21,18 @@ public:
      * @param InComponents The array of Primitive Components to be filtered.
      * @return The filtered array of UBoxComponent*.
      */
-    UFUNCTION(BlueprintCallable, Category = "Custom", meta = (ToolTip = "Filters the given array of Primitive Components, removing duplicates based on their owners, removing any components that do not contain \"Hitbox\" in their name, and filtering out components that are not UBoxComponents."))
+    UFUNCTION(BlueprintCallable, Category = "Hitbox Filter", meta = (ToolTip = "Filters the given array of Primitive Components, removing duplicates based on their owners, removing any components that do not contain \"Hitbox\" in their name, and filtering out components that are not UBoxComponents."))
     TArray<UBoxComponent*> FilterComponents(const TArray<UPrimitiveComponent*>& InComponents);
 
     /**
      * Clears the set of seen actors.
      */
-    UFUNCTION(BlueprintCallable, Category = "Custom", meta = (ToolTip = "Clears the set of seen actors."))
+    UFUNCTION(BlueprintCallable, Category = "Hitbox Filter", meta = (ToolTip = "Clears the set of seen actors."))
     void ClearSeenActors();
 
     /**
      * The set of actors that have been seen.
      */
-    UPROPERTY(BlueprintReadWrite, Category = "Custom", meta = (ToolTip = "The set of actors that have been seen."))
+    UPROPERTY(BlueprintReadWrite, Category = "Hitbox Filter", meta = (ToolTip = "The set of actors that have been seen."))
     TSet<AActor*> SeenActors;
 };
