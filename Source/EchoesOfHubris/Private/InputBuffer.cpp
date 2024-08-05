@@ -5,8 +5,59 @@ TArray<FInput> UInputBuffer::inputBuffer;
 const AActor* UInputBuffer::ReferenceActor = nullptr;
 
 void UInputBuffer::execute() {
-	//ReferenceActor.Attack()
-	return;
+	// Simulate action functions need to set FInput isSuccessful to true
+
+	for (auto& currInput : inputBuffer) {
+		while (!isExpired(currInput)) {
+			// Call input simulate function
+			Inputs inputToExecute = currInput.getInputAction();
+			switch (inputToExecute) {
+			case Inputs::NONE:
+				// Do nothing
+				break;
+			case Inputs::ATTACK:
+				// Call simulate ATTACK
+				if (currInput.getIsSuccessful()) {
+					inputSuccess(inputToExecute); // Remove input if success
+				}
+				else {
+					increaseTimer(currInput);
+				}
+				break;
+			case Inputs::JUMP:
+				// Call simulate JUMP
+				if (currInput.getIsSuccessful()) {
+					inputSuccess(inputToExecute); // Remove input if success
+				}
+				else {
+					increaseTimer(currInput);
+				}
+				break;
+			case Inputs::JUMPBURST:
+				// Call simulate JUMPBURST
+				if (currInput.getIsSuccessful()) {
+					inputSuccess(inputToExecute); // Remove input if success
+				}
+				else {
+					increaseTimer(currInput);
+				}
+				break;
+			case Inputs::DASHBURST:
+				// Call simulate DASHBURST
+				if (currInput.getIsSuccessful()) {
+					inputSuccess(inputToExecute); // Remove input if success
+				}
+				else {
+					increaseTimer(currInput);
+				}
+				break;
+			}
+			// Clear expired input at the top
+			if (isExpired(currInput)) {
+				inputBuffer.RemoveAt(0);
+			}
+		}
+	}
 }
 
 /*
@@ -29,7 +80,7 @@ void UInputBuffer::addToInputBuffer(Inputs newInput) {
 	}
 
 	// Else add action
-	FInput input{ FInput(newInput, INPUT_EXPIRATION_TIME) };
+	FInput input{ FInput(newInput, INPUT_EXPIRATION_TIME, false) };
 	inputBuffer.Add(input);
 
 	return;
@@ -43,6 +94,7 @@ Output: None
 void UInputBuffer::inputSuccess(Inputs newInput) {
 	for (auto& input : inputBuffer) {
 		if (input.getInputAction() == newInput) {
+			input.setIsSuccessful(true);
 			inputBuffer.Remove(input);
 			return;
 		}
