@@ -19,26 +19,38 @@ void UWeightedMovesetList::UpdateMoveWeight(const FString& Move, int32 NewWeight
     }
 }
 
-FString UWeightedMovesetList::GetRandomMove() const
+FString UWeightedMovesetList::GetRandomMove()
 {
     if (MovesetMap.Num() == 0)
     {
         return FString(); // Return an empty string if there are no moves
     }
 
-    // Calculate the total weight excluding moves with a weight of 0
+    // Calculate the total weight excluding moves with a weight of 0 and the last selected move
     int32 TotalWeight = 0;
     for (const auto& Elem : MovesetMap)
     {
-        if (Elem.Value > 0)
+        if (Elem.Value > 0 && Elem.Key != LastSelectedMove)
         {
             TotalWeight += Elem.Value;
         }
     }
 
+    // If all moves except the last selected have a weight of 0, allow reselection of the last move
     if (TotalWeight == 0)
     {
-        return FString(); // No valid moves with a weight greater than 0
+        TotalWeight = 0;
+        for (const auto& Elem : MovesetMap)
+        {
+            if (Elem.Value > 0)
+            {
+                TotalWeight += Elem.Value;
+            }
+        }
+        if (TotalWeight == 0)
+        {
+            return FString(); // No valid moves with a weight greater than 0
+        }
     }
 
     int32 RandomWeight = FMath::RandRange(1, TotalWeight);
@@ -46,11 +58,12 @@ FString UWeightedMovesetList::GetRandomMove() const
 
     for (const auto& Elem : MovesetMap)
     {
-        if (Elem.Value > 0)
+        if (Elem.Value > 0 && Elem.Key != LastSelectedMove)
         {
             CurrentWeight += Elem.Value;
             if (RandomWeight <= CurrentWeight)
             {
+                LastSelectedMove = Elem.Key; // Update the last selected move
                 return Elem.Key;
             }
         }
