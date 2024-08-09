@@ -11,6 +11,7 @@ class ECHOESOFHUBRIS_API UWeightedMovesetList : public UObject
 
 private:
     TMap<FString, int32> MovesetMap;
+    FString LastSelectedMove;
 
 public:
     // Adds a move with a specific weight
@@ -27,7 +28,7 @@ public:
 
     // Returns a random move based on their weights
     UFUNCTION(BlueprintCallable, Category = "Weighted Moveset")
-    FString GetRandomMove() const;
+    FString GetRandomMove();
 
     // Populates the map from arrays of moves and weights
     UFUNCTION(BlueprintCallable, Category = "Weighted Moveset")
