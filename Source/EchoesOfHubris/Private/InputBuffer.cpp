@@ -6,59 +6,34 @@ const AActor* UInputBuffer::ReferenceActor = nullptr;
 
 void UInputBuffer::execute() {
 	// Simulate action functions need to set FInput isSuccessful to true
-
-	for (auto& currInput : inputBuffer) {
-		while (!isExpired(currInput)) {
-			// Call input simulate function
-			Inputs inputToExecute = currInput.getInputAction();
-			switch (inputToExecute) {
-			case Inputs::NONE:
-				// Do nothing
-				break;
-			case Inputs::ATTACK:
-				// Call simulate ATTACK
-				if (currInput.getIsSuccessful()) {
-					inputSuccess(inputToExecute); // Remove input if success
-				}
-				else {
-					increaseTimer(currInput);
-				}
-				break;
-			case Inputs::JUMP:
-				// Call simulate JUMP
-				if (currInput.getIsSuccessful()) {
-					inputSuccess(inputToExecute); // Remove input if success
-				}
-				else {
-					increaseTimer(currInput);
-				}
-				break;
-			case Inputs::JUMPBURST:
-				// Call simulate JUMPBURST
-				if (currInput.getIsSuccessful()) {
-					inputSuccess(inputToExecute); // Remove input if success
-				}
-				else {
-					increaseTimer(currInput);
-				}
-				break;
-			case Inputs::DASHBURST:
-				// Call simulate DASHBURST
-				if (currInput.getIsSuccessful()) {
-					inputSuccess(inputToExecute); // Remove input if success
-				}
-				else {
-					increaseTimer(currInput);
-				}
-				break;
-			}
-			// Clear expired input at the top
-			if (isExpired(currInput)) {
-				inputBuffer.RemoveAt(0);
-			}
+	unsigned int index = 0;
+	while (!isInputBufferEmpty) {
+		FInput currInput = inputBuffer[index];
+		// TODO
+		// Call simulate here
+		if (currInput.getIsSuccessful()) {
+			inputSuccess(currInput.getInputAction());
+		}
+		if (inputBuffer.IsValidIndex(index + 1)) {
+			currInput = inputBuffer[index + 1];
 		}
 	}
+
+	return;
 }
+
+void UInputBuffer::increaseTimerAndCheckIfExpired() {
+	for (signed int i = 0; i < inputBuffer.Num(); i++) {
+		if (isExpired(inputBuffer[i])) {
+			inputBuffer.RemoveAt(i);
+		}
+		else {
+			increaseTimer(inputBuffer[i]);
+		}
+	}
+	return;
+}
+
 
 /*
 Add a FInput to input buffer
