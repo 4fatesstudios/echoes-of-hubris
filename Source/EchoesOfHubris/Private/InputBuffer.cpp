@@ -5,7 +5,20 @@ TArray<FInput> UInputBuffer::inputBuffer;
 const AActor* UInputBuffer::ReferenceActor = nullptr;
 
 void UInputBuffer::execute() {
-	//ReferenceActor.Attack()
+	// Simulate action functions need to set FInput isSuccessful to true
+	unsigned int index = 0;
+	while (!isInputBufferEmpty()) {
+		FInput currInput = inputBuffer[index];
+		// TODO
+		// Call simulate here
+		if (currInput.getIsSuccessful()) {
+			inputSuccess(currInput.getInputAction());
+		}
+		if (inputBuffer.IsValidIndex(index + 1)) {
+			currInput = inputBuffer[index + 1];
+		}
+	}
+
 	return;
 }
 
