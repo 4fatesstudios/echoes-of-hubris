@@ -7,7 +7,7 @@ const AActor* UInputBuffer::ReferenceActor = nullptr;
 void UInputBuffer::execute() {
 	// Simulate action functions need to set FInput isSuccessful to true
 	unsigned int index = 0;
-	while (!isInputBufferEmpty) {
+	while (!isInputBufferEmpty()) {
 		FInput currInput = inputBuffer[index];
 		// TODO
 		// Call simulate here
