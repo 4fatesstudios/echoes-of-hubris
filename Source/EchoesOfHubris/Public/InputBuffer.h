@@ -8,13 +8,13 @@
 
 
 /**
- * 
+ *
  */
 UCLASS()
 class ECHOESOFHUBRIS_API UInputBuffer : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
 private:
 	static TArray<FInput> inputBuffer;
 	static constexpr float INPUT_EXPIRATION_TIME = 0.5f;
@@ -33,8 +33,9 @@ public:
 	static void increaseTimer(FInput& input);
 	static bool isExpired(FInput input);
 	static bool isInputBufferEmpty();
-	
+
 	static void execute();
+	static void increaseTimerAndCheckIfExpired();
 
 	UFUNCTION(BlueprintCallable, Category = "Input Buffer")
 	static void setActorRef(AActor* actorRef);
