@@ -5,9 +5,35 @@ TArray<FInput> UInputBuffer::inputBuffer;
 const AActor* UInputBuffer::ReferenceActor = nullptr;
 
 void UInputBuffer::execute() {
-	//ReferenceActor.Attack()
+	// Simulate action functions need to set FInput isSuccessful to true
+	unsigned int index = 0;
+	while (!isInputBufferEmpty) {
+		FInput currInput = inputBuffer[index];
+		// TODO
+		// Call simulate here
+		if (currInput.getIsSuccessful()) {
+			inputSuccess(currInput.getInputAction());
+		}
+		if (inputBuffer.IsValidIndex(index + 1)) {
+			currInput = inputBuffer[index + 1];
+		}
+	}
+
 	return;
 }
+
+void UInputBuffer::increaseTimerAndCheckIfExpired() {
+	for (signed int i = 0; i < inputBuffer.Num(); i++) {
+		if (isExpired(inputBuffer[i])) {
+			inputBuffer.RemoveAt(i);
+		}
+		else {
+			increaseTimer(inputBuffer[i]);
+		}
+	}
+	return;
+}
+
 
 /*
 Add a FInput to input buffer
@@ -29,7 +55,7 @@ void UInputBuffer::addToInputBuffer(Inputs newInput) {
 	}
 
 	// Else add action
-	FInput input{ FInput(newInput, INPUT_EXPIRATION_TIME) };
+	FInput input{ FInput(newInput, INPUT_EXPIRATION_TIME, false) };
 	inputBuffer.Add(input);
 
 	return;
@@ -43,6 +69,7 @@ Output: None
 void UInputBuffer::inputSuccess(Inputs newInput) {
 	for (auto& input : inputBuffer) {
 		if (input.getInputAction() == newInput) {
+			input.setIsSuccessful(true);
 			inputBuffer.Remove(input);
 			return;
 		}

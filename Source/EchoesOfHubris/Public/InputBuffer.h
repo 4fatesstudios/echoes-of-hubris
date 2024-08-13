@@ -35,6 +35,7 @@ public:
 	static bool isInputBufferEmpty();
 	
 	static void execute();
+	static void increaseTimerAndCheckIfExpired();
 
 	UFUNCTION(BlueprintCallable, Category = "Input Buffer")
 	static void setActorRef(AActor* actorRef);
