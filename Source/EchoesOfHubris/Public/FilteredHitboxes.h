@@ -14,15 +14,13 @@ public:
     UFilteredHitboxes();
 
     /**
-     * Filters the given array of Primitive Components, removing duplicates based on their owners,
-     * removing any components that do not contain "Hitbox" in their name,
-     * and filtering out components that are not UBoxComponents.
+     * Filters the given array of Primitive Components, removing duplicates based on their owners.
      *
      * @param InComponents The array of Primitive Components to be filtered.
-     * @return The filtered array of UBoxComponent*.
+     * @return The filtered array of UPrimitiveComponent*.
      */
-    UFUNCTION(BlueprintCallable, Category = "Hitbox Filter", meta = (ToolTip = "Filters the given array of Primitive Components, removing duplicates based on their owners, removing any components that do not contain \"Hitbox\" in their name, and filtering out components that are not UBoxComponents."))
-    TArray<UBoxComponent*> FilterComponents(const TArray<UPrimitiveComponent*>& InComponents);
+    UFUNCTION(BlueprintCallable, Category = "Hitbox Filter", meta = (ToolTip = "Filters the given array of Primitive Components, removing duplicates based on their owners."))
+    TArray<UPrimitiveComponent*> FilterComponents(const TArray<UPrimitiveComponent*>& InComponents);
 
     /**
      * Clears the set of seen actors.
