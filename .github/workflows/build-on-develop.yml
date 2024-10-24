@@ -1,0 +1,37 @@
+name: Build Unreal Project on Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: main-runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cook and Stage UE Project
+        uses: OrchidIsle/UE5-Build-Project@latest
+        with:
+          RUNUAT_PATH: '"C:/Program Files/Epic Games/UE_5.4/Engine/Build/BatchFiles/RunUAT.bat"'
+          UPROJECT_PATH: ${{ github.workspace }}/EchoesOfHubris.uproject
+          BUILD_CONFIG: Development
+          PLATFORM: Win64
+          CLEAN: true
+          COOK: true
+          STAGE: true
+          PACKAGE: false
+          PAK: false
+          SERVER: false
+          ARCHIVE: false
+          ARCHIVE_PATH: 'C:/Archives/MyGame'
+          NULLRHI: true
+          EDITOR: true
+          ENCRYPT_INI: true
+          DELETE_PDB: true
+          ANTICHEAT_ENABLED: false
+          ANTICHEAT_PRIVATE_KEY: 'base64encodedprivatekey'
+          ANTICHEAT_PUBLIC_CERT: 'base64encodedpubliccert'
