@@ -1,5 +1,4 @@
 # Ignore these folders, as they are auto-generated or contain machine-specific data
-Binaries/
 DerivedDataCache/
 Intermediate/
 Saved/
