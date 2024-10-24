@@ -15,3 +15,13 @@ TArray<AActor*> USortActorArrByDistToActor::SortArrayByActorDistance(const TArra
 
     return SortedArray;
 }
+
+TArray<AActor*> USortActorArrByDistToActor::SortArrayByLocationDistance(const TArray<AActor*>& ActorArray, const FVector& ReferenceLocation)
+{
+    TArray<AActor*> SortedArray = ActorArray;
+    SortedArray.Sort([ReferenceLocation](const AActor& A, const AActor& B) {
+        return FVector::Dist(A.GetActorLocation(), ReferenceLocation) < FVector::Dist(B.GetActorLocation(), ReferenceLocation);
+        });
+
+    return SortedArray;
+}

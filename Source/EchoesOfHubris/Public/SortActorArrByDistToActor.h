@@ -15,4 +15,7 @@ class ECHOESOFHUBRIS_API USortActorArrByDistToActor : public UBlueprintFunctionL
 public:
     UFUNCTION(BlueprintCallable, Category = "Sort Actor Array by Distance to Actor")
     static TArray<AActor*> SortArrayByActorDistance(const TArray<AActor*>& ActorArray, AActor* ReferenceActor);
+
+    UFUNCTION(BlueprintCallable, Category = "Sort Actor Array by Distance to Location")
+    static TArray<AActor*> SortArrayByLocationDistance(const TArray<AActor*>& ActorArray, const FVector& ReferenceLocation);
 };
