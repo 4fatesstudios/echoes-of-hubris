@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Prompt for user confirmation
+echo "Reminder: Please follow the pre-commit steps:"
+echo "1. Close Unreal Engine."
+echo "2. Rebuild the project in your IDE (Visual Studio)."
+echo "3. Reopen Unreal Engine to check for errors."
+echo "4. Ensure all Blueprints are compiled and all nodes are refreshed."
+echo "5. Commit only after verifying no issues remain."
+
+# Ask for user confirmation using /dev/tty to ensure it waits for input
+echo "Did you follow these steps? (type 'yes' to continue or anything else to cancel)"
+read -r response </dev/tty  # Explicitly read input from the terminal
+
+# Process the response
+if [[ "$response" != "yes" ]]; then
+    echo "Commit canceled. Please follow the steps."
+    exit 1  # Exit with a failure status to cancel the commit
+else
+    echo "Pre-commit steps verified. Proceeding with commit..."
+    exit 0  # Exit with a success status to allow the commit
+fi
