@@ -1,10 +1,13 @@
-Binaries
-DerivedDataCache
-Intermediate
-Saved
-Build
-.vscode
-.vs
+# Ignore these folders, as they are auto-generated or contain machine-specific data
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+
+# Ignore IDE-specific files (Visual Studio, Xcode, etc.)
+.vscode/
+.vs/
 *.VC.db
 *.opensdf
 *.opendb
@@ -13,4 +16,9 @@ Build
 *.suo
 *.xcodeproj
 *.xcworkspace
+
+# Ignore Mac-specific files
 *.DS_Store
+
+# Ensure the .uproject file is tracked (important for Unreal project settings)
+!*.uproject
