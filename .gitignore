@@ -21,3 +21,5 @@ Build/
 
 # Ensure the .uproject file is tracked (important for Unreal project settings)
 !*.uproject
+# Ensure the workflow is tracked
+!.github/workflows/build-on-develop.yml
