@@ -11,17 +11,22 @@ TArray<UPrimitiveComponent*> UFilteredHitboxes::FilterComponents(const TArray<UP
 {
     TArray<UPrimitiveComponent*> FilteredComponents;
 
-    // Set to track seen owners
+    // Set to track seen owners during this filter pass
     TSet<AActor*> SeenOwners;
 
     for (UPrimitiveComponent* PrimitiveComp : InComponents)
     {
-        // Check if the component's owner hasn't been seen yet
-        if (PrimitiveComp && !SeenOwners.Contains(PrimitiveComp->GetOwner()))
+        AActor* Owner = PrimitiveComp ? PrimitiveComp->GetOwner() : nullptr;
+
+        // Check if the component's owner exists, hasn't been seen in this filter pass, and isn't in SeenActors
+        if (Owner && !SeenOwners.Contains(Owner) && !SeenActors.Contains(Owner))
         {
             // Add to seen owners and filtered list
-            SeenOwners.Add(PrimitiveComp->GetOwner());
+            SeenOwners.Add(Owner);
             FilteredComponents.Add(PrimitiveComp);
+
+            // Also add the actor to SeenActors to keep track of all processed actors
+            SeenActors.Add(Owner);
         }
     }
 
