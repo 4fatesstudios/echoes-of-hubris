@@ -37,6 +37,7 @@ public:
 private:
 	TArray<FRopeSegment> ropeSegments;
 	float ropeSegmentLength;
+	int segmentLength;
 
 protected:
 	// Called when the game starts or when spawned

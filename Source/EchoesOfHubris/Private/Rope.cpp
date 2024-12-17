@@ -16,7 +16,8 @@ ARope::ARope()
 	PrimaryActorTick.bCanEverTick = true;
 
 	this->ropeSegments = TArray<FRopeSegment>();
-	this->ropeSegmentLength = 50.0f;
+	this->ropeSegmentLength = 5.0f;
+	this->segmentLength = 50;
 }
 
 // Called when the game starts or when spawned
