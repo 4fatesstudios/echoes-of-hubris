@@ -3,7 +3,7 @@
 # Prompt for user confirmation
 echo "Reminder: Please follow the pre-commit steps:"
 echo "1. Close Unreal Engine."
-echo "2. Rebuild the project in your IDE (Visual Studio)."
+echo "2. Rebuild the project in your IDE (Rider)."
 echo "3. Reopen Unreal Engine to check for errors."
 echo "4. Ensure all Blueprints are compiled and all nodes are refreshed."
 echo "5. Commit only after verifying no issues remain."
