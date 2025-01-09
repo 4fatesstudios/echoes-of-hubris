@@ -3678,18 +3678,6 @@
 			"Type": "RequiredResource"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/LayeredMovement/Binaries/Win64/UnrealEditor-LayeredMovement.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/LayeredMovement/Binaries/Win64/UnrealEditor-LayeredMovement.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/LayeredMovement/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
 			"Path": "$(ProjectDir)/Plugins/PaperZD_5.4/Binaries/Win64/UnrealEditor-PaperZD.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -26780,10 +26768,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/LayeredMovement/LayeredMovement.uplugin",
-			"Type": "UFS"
-		},
-		{
 			"Path": "$(ProjectDir)/Plugins/PaperZD_5.4/PaperZD.uplugin",
 			"Type": "UFS"
 		},
@@ -26884,7 +26868,6 @@
 		"InterchangeTests",
 		"KDevelopSourceCodeAccess",
 		"LauncherChunkInstaller",
-		"LayeredMovement",
 		"LevelSequenceEditor",
 		"LightMixer",
 		"LinuxDeviceProfileSelector",
