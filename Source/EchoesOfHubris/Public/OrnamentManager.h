@@ -9,9 +9,12 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class ECHOESOFHUBRIS_API UOrnamentManager : public UGameInstance
 {
 	GENERATED_BODY()
-	
+
+	public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = OrnamentManager)
+	TSubclassOf<UOrnament> Ornament;
 };
