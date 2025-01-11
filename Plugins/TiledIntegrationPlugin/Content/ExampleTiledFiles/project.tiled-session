@@ -1,0 +1,39 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tileset.json",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "map.json": {
+            "scale": 0.938125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 399.7335109926716,
+                "y": 199.86675549633577
+            }
+        },
+        "tileset.json": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Gamedev/Isometric/Plugins/TiledIntegration/Content/Example/TiledFiles",
+    "map.lastUsedFormat": "json",
+    "map.orientation": null,
+    "map.tileHeight": 16,
+    "openFiles": [
+        "map.json",
+        "tileset.json"
+    ],
+    "project": "project.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "map.json",
+        "tileset.json"
+    ],
+    "tileset.lastUsedFormat": "json"
+}

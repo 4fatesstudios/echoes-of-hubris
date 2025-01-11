@@ -15,6 +15,7 @@ Build/
 *.suo
 *.xcodeproj
 *.xcworkspace
+.idea/
 
 # Ignore Mac-specific files
 *.DS_Store

@@ -1,0 +1,44 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "TiledIntegration",
+	"Description": "Integration with Tiled software to import and sync tilemaps and tilesets",
+	"Category": "Other",
+	"CreatedBy": "Flekz Games",
+	"CreatedByURL": "https://github.com/davidonete/",
+	"DocsURL": "https://davidonete.github.io/tiled_integration_plugin/",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7cde7c5f731743888f4068c8e8c24f6a",
+	"SupportURL": "https://github.com/davidonete/tiled_integration_plugin/issues",
+	"EngineVersion": "5.4.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "TiledIntegration",
+			"Type": "Runtime",
+			"LoadingPhase": "PostEngineInit",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		},
+		{
+			"Name": "TiledIntegrationEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
+		},
+		{
+			"Name": "Paper2D",
+			"Enabled": true
+		}
+	]
+}

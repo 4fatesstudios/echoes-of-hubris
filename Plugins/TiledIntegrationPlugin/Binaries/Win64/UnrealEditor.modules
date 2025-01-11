@@ -1,0 +1,8 @@
+{
+	"BuildId": "33043543",
+	"Modules": 
+	{
+		"TiledIntegration": "UnrealEditor-TiledIntegration.dll",
+		"TiledIntegrationEditor": "UnrealEditor-TiledIntegrationEditor.dll"
+	}
+}

@@ -38,6 +38,11 @@
 		{
 			"Name": "CommonUI",
 			"Enabled": true
+		},
+		{
+			"Name": "TiledIntegration",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7cde7c5f731743888f4068c8e8c24f6a"
 		}
 	]
 }
