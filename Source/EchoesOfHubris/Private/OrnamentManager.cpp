@@ -3,7 +3,7 @@
 
 #include "OrnamentManager.h"
 
-void UOrnamentManager::addOrnament(const TSubclassOf<UObject> Ornament)
+void UOrnamentManager::AddOrnament(const TSubclassOf<UObject> Ornament)
 {
 	if (!Ornament)
 	{
@@ -23,7 +23,7 @@ void UOrnamentManager::addOrnament(const TSubclassOf<UObject> Ornament)
 	UE_LOG(LogTemp, Display, TEXT("Ornament added"));
 }
 
-bool UOrnamentManager::equipOrnament(const TSubclassOf<UObject> Ornament)
+bool UOrnamentManager::EquipOrnament(const TSubclassOf<UObject> Ornament)
 {
 	return false;
 }
