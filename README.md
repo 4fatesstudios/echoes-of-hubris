@@ -2,11 +2,13 @@
 
 **Metroidvania · Unreal Engine 5 · C++ · Blueprints · Gameplay Systems · Enemy AI**
 
-Echoes of Hubris is a Metroidvania developed in Unreal Engine 5 by a six-person team under 4Fates Studios.
+Echoes of Hubris is a Metroidvania set within a massive, mysterious tower inspired by the Tower of Babel. The protagonist awakens with no memory of who they are, knowing only that they must ascend.
+
+As they climb toward the top, they explore interconnected environments, confront increasingly dangerous enemies, and uncover more about the tower and their place within it.
+
+Developed by a six-person team in Unreal Engine 5, Echoes of Hubris was the first project set within the larger universe later shared with Project Warden.
 
 The project combines C++ and Blueprint development across interconnected gameplay systems including combat, inventory, character movement, enemy behavior, and multi-phase boss encounters.
-
-Development ran from **January 2024 through December 2024**, with more than 400 hours of programming contributed across the project.
 
 ## Gameplay Systems
 
